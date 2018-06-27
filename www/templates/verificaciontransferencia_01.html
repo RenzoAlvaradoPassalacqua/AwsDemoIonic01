@@ -1,0 +1,30 @@
+<ion-view view-title="Verificacion Transferencia Interbancaria">
+        <ion-content>
+                <label class="item item-input">   
+                     <h3>Verificacion de Transferencia Interbancaria</h3>
+                </label>
+          
+        <label class="item item-input">
+                <span class="input-label">Cuenta Origen</span>
+                <h3>{{ AccountData.numeroCuentaOrigen }}</h3>
+        </label>
+        <label class="item item-input">
+                <span class="input-label">Monto</span>
+                <h3>{{ AccountData.montoOrigen }}</h3>
+        </label>
+        <label class="item item-input">
+                <span class="input-label">Banco Destino</span>
+                <h3>{{ AccountData.BancoDestino }}</h3>
+        </label>
+        <label class="item item-input">
+                <span class="input-label">Cuenta Destino</span>
+                <h3>{{ AccountData.numeroCuentaDestino }}</h3>
+        </label>
+        <label class="item">
+                <button class="button button-block button-positive"  type="submit" ng-disabled="verificaciontransferencia1Form.$invalid">Transferir</button>
+        </label>
+        </ion-content>
+       
+       
+</ion-view>
+      

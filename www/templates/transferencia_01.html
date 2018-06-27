@@ -1,28 +1,31 @@
 <ion-view view-title="Transferencia Interbancaria Diferida">
     <ion-content>
         
-            <form ng-submit="doTransferir()">
+            <form name="transferencia1Form"  novalidate ng-submit="doTransferir()" ng-controller="Transferencia1Controller">
               <div class="list">
                 <label class="item item-input">
                   <span class="input-label">Cuenta Origen</span>
-                  <input type="text" ng-model="AccountData.numeroCuentaOrigen">
+                  <input type="text" ng-model="AccountData.numeroCuentaOrigen" required ng-minlength="6" placeholder="Numero de cuenta origen">
+                  
                 </label>
                 <label class="item item-input">
                   <span class="input-label">Monto</span>
-                  <input type="text" ng-model="AccountData.montoOrigen">
+                  <input type="text" ng-model="AccountData.montoOrigen" required ng-minlength="2" placeholder="Monto a transferir de la cuenta origen">
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Cuenta Destino</span>
-                    <input type="text" ng-model="AccountData.numeroCuentaDestino">
+                    <input type="text" ng-model="AccountData.numeroCuentaDestino" required ng-minlength="6" placeholder="Numero de cuenta destino">
                 </label>
                 <label class="item item-input">
                         <span class="input-label">Banco Destino</span>
-                        <input type="text" ng-model="AccountData.BancoDestino">
+                        <input type="text" ng-model="AccountData.BancoDestino" required ng-minlength="1" placeholder="Banco destino">
                 </label>
                 <label class="item">
-                  <button class="button button-block button-positive" type="submit">Siguiente</button>
+                        <button class="button button-block button-positive"  type="submit" ng-disabled="transferencia1Form.$invalid">Siguiente</button>
                 </label>
               </div>
+
+              
             </form>
          
     

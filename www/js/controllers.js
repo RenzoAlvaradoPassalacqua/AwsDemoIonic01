@@ -11,6 +11,7 @@ angular.module('starter.controllers', [])
 
   // Form data for the login modal
   $scope.loginData = {};
+  $scope.AccountData = {};
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -39,6 +40,24 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+
+ 
+})
+
+.controller('Transferencia1Controller', function ($scope, $location) {
+  $scope.query = { keywords: "" };
+
+  console.log('doTransferir ', $scope.AccountData);
+  //on form submit
+  $scope.doTransferir = function () {
+    if ($scope.query.keywords !== null) {
+      $location.path('/app/verificacionTransferencia1');
+    }
+  };
+
+  
+  //on button click
+  $scope.submitForm = $scope.doTransferir;
 })
 
 .controller('PlaylistsCtrl', function($scope) {

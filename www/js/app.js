@@ -89,6 +89,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         controller: 'PlaylistCtrl'
       }
     }
+  })
+  
+  .state('app.verificacionTransferencia1', {
+    url: '/verificacionTransferencia1',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/verificaciontransferencia_01.html'
+       
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/saldos');
