@@ -1,6 +1,30 @@
-<ion-view view-title="Transferencia Tipo 1">
+<ion-view view-title="Transferencia Interbancaria Diferida">
     <ion-content>
-      <h1>Transferencia Tipo 1</h1>
+        
+            <form ng-submit="doTransferir()">
+              <div class="list">
+                <label class="item item-input">
+                  <span class="input-label">Cuenta Origen</span>
+                  <input type="text" ng-model="AccountData.numeroCuentaOrigen">
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Monto</span>
+                  <input type="text" ng-model="AccountData.montoOrigen">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Cuenta Destino</span>
+                    <input type="text" ng-model="AccountData.numeroCuentaDestino">
+                </label>
+                <label class="item item-input">
+                        <span class="input-label">Banco Destino</span>
+                        <input type="text" ng-model="AccountData.BancoDestino">
+                </label>
+                <label class="item">
+                  <button class="button button-block button-positive" type="submit">Siguiente</button>
+                </label>
+              </div>
+            </form>
+         
     
     </ion-content>
   </ion-view>
