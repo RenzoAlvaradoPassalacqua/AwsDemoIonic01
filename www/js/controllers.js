@@ -42,7 +42,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
+  $scope.transferencias = [
     { title: 'Transferencias Tipo 1', id: 1 },
     { title: 'Transferencias Tipo 2', id: 2 },
     { title: 'Transferencias Tipo 3', id: 3 }

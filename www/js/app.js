@@ -51,18 +51,18 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
-  .state('app.playlists', {
-      url: '/playlists',
+  .state('app.transferencias', {
+      url: '/transferencias',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
+          templateUrl: 'templates/transferencias.html',
           controller: 'PlaylistsCtrl'
         }
       }
     })
 
   .state('app.single', {
-    url: '/playlists/:playlistId',
+    url: '/transferencias/:playlistId',
     views: {
       'menuContent': {
         templateUrl: 'templates/playlist.html',
