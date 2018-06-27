@@ -43,14 +43,17 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
+    { title: 'Transferencias Tipo 1', id: 1 },
+    { title: 'Transferencias Tipo 2', id: 2 },
+    { title: 'Transferencias Tipo 3', id: 3 }
+    
   ];
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });
+
+ 
+ 
+  
+
