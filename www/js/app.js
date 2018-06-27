@@ -62,10 +62,30 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
   .state('app.single', {
-    url: '/transferencias/:playlistId',
+    url: '/transferencias/1',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
+        templateUrl: 'templates/transferencia_01.html',
+        controller: 'PlaylistCtrl'
+      }
+    }
+  })
+  
+  .state('app.transferencias/2', {
+    url: '/transferencias/2',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/transferencia_02.html',
+        controller: 'PlaylistCtrl'
+      }
+    }
+  })
+
+  .state('app.transferencias/3', {
+    url: '/transferencias/3',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/transferencia_03.html',
         controller: 'PlaylistCtrl'
       }
     }
