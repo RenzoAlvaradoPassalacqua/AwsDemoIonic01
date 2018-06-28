@@ -36,7 +36,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/saldos',
     views: {
       'menuContent': {
-        templateUrl: 'templates/saldos.html'
+        templateUrl: 'templates/saldos.html',
+        controller: 'SaldoCtrl'
       }
     }
   })

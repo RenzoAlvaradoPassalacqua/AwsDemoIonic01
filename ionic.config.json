@@ -6,10 +6,17 @@
     "gulp": {},
     "cordova": {}
   },
+   
   "watchPatterns": [
     "scss/**/*",
     "www/**/*",
     "!www/lib/**/*",
     "!www/**/*.map"
-  ]
+  ],
+  "proxies": [{
+    "path": "/api-rest",
+    "proxyUrl": "https://c550icozi9.execute-api.us-east-2.amazonaws.com/Develop"
+    }]
+    
 }
+

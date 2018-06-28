@@ -34,16 +34,24 @@ angular.module('starter.controllers', [])
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
 
+    var apigClient = apigClientFactory.newClient({
+      accessKey: 'AKIAID6P4WF7TRVV7NKA',
+      secretKey: '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',
+      //sessionToken: 'SESSION_TOKEN', //OPTIONAL: If you are using temporary credentials you must include the session token
+      region: 'us-east-2' // OPTIONAL: The region where the API is deployed, by default this parameter is set to us-east-1
+  });
+   
+
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
     $timeout(function() {
       $scope.closeLogin();
     }, 1000);
   };
-
+ 
  
 })
-
+ 
 .controller('Transferencia1Controller', function ($scope, $location) {
   $scope.query = { keywords: "" };
 
@@ -70,6 +78,64 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+})
+
+.controller('SaldoCtrl', function($scope) {
+  console.log('SaldoCtrl ', $scope.AccountData);
+})
+
+
+
+.controller('SaldoCtrl', function($scope, $stateParams) {
+ // alert("page loaded");
+ console.log('SaldoCtrl page loaded ' );
+
+ $scope.$on("$ionicView.beforeEnter", function(event, data){
+   // handle event
+   console.log("beforeEnter " );
+  }) 
+  
+  $scope.$on("$ionicView.afterEnter", function(event, data){
+    // handle event
+   console.log("afterEnter   " );
+
+   var apigClient = apigClientFactory.newClient({
+    accessKey: 'AKIAID6P4WF7TRVV7NKA',
+    secretKey: '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',
+    //sessionToken: 'SESSION_TOKEN', //OPTIONAL: If you are using temporary credentials you must include the session token
+    region: 'us-east-2' // OPTIONAL: The region where the API is deployed, by default this parameter is set to us-east-1
+});
+ 
+    var params = {
+      //This is where any header, path, or querystring request params go. The key is the parameter named as defined in the API
+      TableName: 'awssynopsisiosdemo-mobilehub-1926081490-Notes'
+  };
+  var body = {
+      //This is where you define the body of the request
+  };
+  var additionalParams = {
+      //If there are any unmodeled query parameters or headers that need to be sent with the request you can add them here
+      headers: {
+         // param0: '',
+         // param1: ''
+      },
+      queryParams: {
+          //param0: '',
+          //param1: ''
+      }
+  };
+  
+  apigClient.rootGet(params, body, additionalParams)
+      .then(function(result){
+          //This is where you would put a success callback
+          console.log("rootGet result from API Gateway ", result );
+
+      }).catch( function(result){
+          //This is where you would put an error callback
+      });
+
+  })
+
 });
 
  
