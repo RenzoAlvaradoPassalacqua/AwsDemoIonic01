@@ -100,8 +100,8 @@ angular.module('starter.controllers', [])
    console.log("afterEnter   " );
 
    var apigClient = apigClientFactory.newClient({
-    accessKey: 'AKIAID6P4WF7TRVV7NKA',
-    secretKey: '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',
+    accessKey: ' ',
+    secretKey: ' ',
     //sessionToken: 'SESSION_TOKEN', //OPTIONAL: If you are using temporary credentials you must include the session token
     region: 'us-east-2' // OPTIONAL: The region where the API is deployed, by default this parameter is set to us-east-1
 });
