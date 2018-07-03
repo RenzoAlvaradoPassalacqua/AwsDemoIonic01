@@ -100,8 +100,8 @@ angular.module('starter.controllers', [])
    console.log("afterEnter   " );
 
    var apigClient = apigClientFactory.newClient({
-    accessKey: ' ',
-    secretKey: ' ',
+    accessKey: 'AKIAIEYTAXIPQXNVWRIA',
+    secretKey: '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',
     //sessionToken: 'SESSION_TOKEN', //OPTIONAL: If you are using temporary credentials you must include the session token
     region: 'us-east-2' // OPTIONAL: The region where the API is deployed, by default this parameter is set to us-east-1
 });
@@ -112,6 +112,8 @@ angular.module('starter.controllers', [])
   };
   var body = {
       //This is where you define the body of the request
+      //TableName:'awssynopsisiosdemo-mobilehub-1926081490-Notes'
+ 
   };
   var additionalParams = {
       //If there are any unmodeled query parameters or headers that need to be sent with the request you can add them here
@@ -125,7 +127,7 @@ angular.module('starter.controllers', [])
       }
   };
   
-  apigClient.rootGet(params, body, additionalParams)
+  apigClient.rootGet (params, body, additionalParams)
       .then(function(result){
           //This is where you would put a success callback
           console.log("rootGet result from API Gateway ", result );
