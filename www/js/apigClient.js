@@ -53,8 +53,8 @@ apigClientFactory.newClient = function (config) {
 
     
     // extract endpoint and path from url
-       //var invokeUrl = 'https://c550icozi9.execute-api.us-east-2.amazonaws.com/Develop';
-       var invokeUrl = 'http://localhost:8100/api-rest';
+     //var invokeUrl = 'https://ek8gzfe352.execute-api.us-east-2.amazonaws.com/Develop';
+     var invokeUrl = 'http://localhost:8100/api-rest';
     var endpoint = /(^https?:\/\/[^\/]+)/g.exec(invokeUrl)[1];
     var pathComponent = invokeUrl.substring(endpoint.length);
 
@@ -102,6 +102,24 @@ apigClientFactory.newClient = function (config) {
     };
     
     
+    apigClient.rootOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var rootOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(rootOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
     apigClient.consultarestexternoPost = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
@@ -120,46 +138,10 @@ apigClientFactory.newClient = function (config) {
     };
     
     
-    apigClient.consultarestexternoOptions = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
-        
-        var consultarestexternoOptionsRequest = {
-            verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/consultarestexterno').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(consultarestexternoOptionsRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
-    apigClient.consultasaldosOptions = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
-        
-        var consultasaldosOptionsRequest = {
-            verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/consultasaldos').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(consultasaldosOptionsRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
     apigClient.consultasaldosAhorrosPost = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
-        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        apiGateway.core.utils.assertParametersDefined(params, ['body'], ['body']);
         
         var consultasaldosAhorrosPostRequest = {
             verb: 'post'.toUpperCase(),
@@ -171,24 +153,6 @@ apigClientFactory.newClient = function (config) {
         
         
         return apiGatewayClient.makeRequest(consultasaldosAhorrosPostRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
-    apigClient.consultasaldosAhorrosOptions = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
-        
-        var consultasaldosAhorrosOptionsRequest = {
-            verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/consultasaldos/ahorros').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(consultasaldosAhorrosOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
@@ -210,111 +174,363 @@ apigClientFactory.newClient = function (config) {
     };
     
     
-    apigClient.consultasaldosAhorrosDetalleOptions = function (params, body, additionalParams) {
+    apigClient.consultasaldosAportacionesOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var consultasaldosAhorrosDetalleOptionsRequest = {
+        var consultasaldosAportacionesOptionsRequest = {
             verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/consultasaldos/ahorros/detalle').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/consultasaldos/aportaciones').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(consultasaldosAhorrosDetalleOptionsRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(consultasaldosAportacionesOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
-    apigClient.transferenciasOptions = function (params, body, additionalParams) {
+    apigClient.consultasaldosAportacionesDetalleOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var transferenciasOptionsRequest = {
+        var consultasaldosAportacionesDetalleOptionsRequest = {
             verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/transferencias').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/consultasaldos/aportaciones/detalle').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(transferenciasOptionsRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(consultasaldosAportacionesDetalleOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
-    apigClient.transferenciasInterbancariaOptions = function (params, body, additionalParams) {
+    apigClient.consultasaldosDepositosplazofijoOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var transferenciasInterbancariaOptionsRequest = {
+        var consultasaldosDepositosplazofijoOptionsRequest = {
             verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/transferencias/interbancaria').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/consultasaldos/depositosplazofijo').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(transferenciasInterbancariaOptionsRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(consultasaldosDepositosplazofijoOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
-    apigClient.transferenciasInterbancariaDiferidaOptions = function (params, body, additionalParams) {
+    apigClient.consultasaldosDepositosplazofijoDetalleOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var transferenciasInterbancariaDiferidaOptionsRequest = {
+        var consultasaldosDepositosplazofijoDetalleOptionsRequest = {
             verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/transferencias/interbancaria/diferida').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/consultasaldos/depositosplazofijo/detalle').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(transferenciasInterbancariaDiferidaOptionsRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(consultasaldosDepositosplazofijoDetalleOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
-    apigClient.transferenciasInterbancariaDiferidaEntrecuentasOptions = function (params, body, additionalParams) {
+    apigClient.consultasaldosPrestamosOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var transferenciasInterbancariaDiferidaEntrecuentasOptionsRequest = {
+        var consultasaldosPrestamosOptionsRequest = {
             verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/transferencias/interbancaria/diferida/entrecuentas').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/consultasaldos/prestamos').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(transferenciasInterbancariaDiferidaEntrecuentasOptionsRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(consultasaldosPrestamosOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
-    apigClient.transferenciasInterbancariaDiferidaOtrascuentasOptions = function (params, body, additionalParams) {
+    apigClient.manejocuentasOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var transferenciasInterbancariaDiferidaOtrascuentasOptionsRequest = {
+        var manejocuentasOptionsRequest = {
             verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/transferencias/interbancaria/diferida/otrascuentas').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/manejocuentas').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(transferenciasInterbancariaDiferidaOtrascuentasOptionsRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(manejocuentasOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.manejocuentasAperturaplazofijoOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var manejocuentasAperturaplazofijoOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/manejocuentas/aperturaplazofijo').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(manejocuentasAperturaplazofijoOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.manejocuentasAperturaplazofijoRealizaoperacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var manejocuentasAperturaplazofijoRealizaoperacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/manejocuentas/aperturaplazofijo/realizaoperacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(manejocuentasAperturaplazofijoRealizaoperacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.manejocuentasAperturaplazofijoVerificacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var manejocuentasAperturaplazofijoVerificacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/manejocuentas/aperturaplazofijo/verificacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(manejocuentasAperturaplazofijoVerificacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.pagosAportacionesOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var pagosAportacionesOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/pagos/aportaciones').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(pagosAportacionesOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.pagosAportacionesRealizaroperacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var pagosAportacionesRealizaroperacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/pagos/aportaciones/realizaroperacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(pagosAportacionesRealizaroperacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.pagosAportacionesVerificacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var pagosAportacionesVerificacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/pagos/aportaciones/verificacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(pagosAportacionesVerificacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.pagosPrestamosOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var pagosPrestamosOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/pagos/prestamos').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(pagosPrestamosOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.pagosPrestamosRealizaoperacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var pagosPrestamosRealizaoperacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/pagos/prestamos/realizaoperacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(pagosPrestamosRealizaoperacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.pagosPrestamosVerificacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var pagosPrestamosVerificacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/pagos/prestamos/verificacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(pagosPrestamosVerificacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasDesdebancosOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasDesdebancosOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/desdebancos').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasDesdebancosOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasDesdebancosRealizaoperacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasDesdebancosRealizaoperacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/desdebancos/realizaoperacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasDesdebancosRealizaoperacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasDesdebancosVerificacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasDesdebancosVerificacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/desdebancos/verificacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasDesdebancosVerificacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasInterbancariaDiferidaEntrecuentasRealizaoperacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasInterbancariaDiferidaEntrecuentasRealizaoperacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/interbancaria/diferida/entrecuentas/realizaoperacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasInterbancariaDiferidaEntrecuentasRealizaoperacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasInterbancariaDiferidaEntrecuentasRealizaoperacionVerificacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasInterbancariaDiferidaEntrecuentasRealizaoperacionVerificacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/interbancaria/diferida/entrecuentas/realizaoperacion/verificacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasInterbancariaDiferidaEntrecuentasRealizaoperacionVerificacionOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
@@ -336,42 +552,6 @@ apigClientFactory.newClient = function (config) {
     };
     
     
-    apigClient.transferenciasInterbancariaDiferidaOtrascuentasRealizaoperacionOptions = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
-        
-        var transferenciasInterbancariaDiferidaOtrascuentasRealizaoperacionOptionsRequest = {
-            verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/transferencias/interbancaria/diferida/otrascuentas/realizaoperacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(transferenciasInterbancariaDiferidaOtrascuentasRealizaoperacionOptionsRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
-    apigClient.transferenciasInterbancariaDiferidaOtrascuentasVerificacionOptions = function (params, body, additionalParams) {
-        if(additionalParams === undefined) { additionalParams = {}; }
-        
-        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
-        
-        var transferenciasInterbancariaDiferidaOtrascuentasVerificacionOptionsRequest = {
-            verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/transferencias/interbancaria/diferida/otrascuentas/verificacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
-            headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
-            body: body
-        };
-        
-        
-        return apiGatewayClient.makeRequest(transferenciasInterbancariaDiferidaOtrascuentasVerificacionOptionsRequest, authType, additionalParams, config.apiKey);
-    };
-    
-    
     apigClient.transferenciasInterbancariaInmediataOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
@@ -387,6 +567,186 @@ apigClientFactory.newClient = function (config) {
         
         
         return apiGatewayClient.makeRequest(transferenciasInterbancariaInmediataOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasInterbancariaInmediataEntrecuentasOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasInterbancariaInmediataEntrecuentasOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/interbancaria/inmediata/entrecuentas').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasInterbancariaInmediataEntrecuentasOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasInterbancariaInmediataEntrecuentasRealizaoperacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasInterbancariaInmediataEntrecuentasRealizaoperacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/interbancaria/inmediata/entrecuentas/realizaoperacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasInterbancariaInmediataEntrecuentasRealizaoperacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasInterbancariaInmediataEntrecuentasVerificacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasInterbancariaInmediataEntrecuentasVerificacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/interbancaria/inmediata/entrecuentas/verificacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasInterbancariaInmediataEntrecuentasVerificacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasInterbancariaInmediataOtrascuentasOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasInterbancariaInmediataOtrascuentasOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/interbancaria/inmediata/otrascuentas').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasInterbancariaInmediataOtrascuentasOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasInterbancariaInmediataOtrascuentasRealizaoperacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasInterbancariaInmediataOtrascuentasRealizaoperacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/interbancaria/inmediata/otrascuentas/realizaoperacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasInterbancariaInmediataOtrascuentasRealizaoperacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasInterbancariaInmediataOtrascuentasVerificacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasInterbancariaInmediataOtrascuentasVerificacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/interbancaria/inmediata/otrascuentas/verificacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasInterbancariaInmediataOtrascuentasVerificacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasMismobancoOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasMismobancoOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/mismobanco').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasMismobancoOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasMismobancoEntrecuentasOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasMismobancoEntrecuentasOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/mismobanco/entrecuentas').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasMismobancoEntrecuentasOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasMismobancoEntrecuentasRealizaoperacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasMismobancoEntrecuentasRealizaoperacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/mismobanco/entrecuentas/realizaoperacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasMismobancoEntrecuentasRealizaoperacionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.transferenciasMismobancoEntrecuentasVerificacionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var transferenciasMismobancoEntrecuentasVerificacionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/transferencias/mismobanco/entrecuentas/verificacion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(transferenciasMismobancoEntrecuentasVerificacionOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
 

@@ -33,14 +33,15 @@ angular.module('starter.controllers', [])
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-
+/*
     var apigClient = apigClientFactory.newClient({
-      accessKey: ' ',
-      secretKey: ' ',
+      accessKey: 'AKIAJSFR5WJXDMOZ4BVQ',
+      secretKey: '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',
       //sessionToken: 'SESSION_TOKEN', //OPTIONAL: If you are using temporary credentials you must include the session token
       region: 'us-east-2' // OPTIONAL: The region where the API is deployed, by default this parameter is set to us-east-1
+      
   });
-   
+   */
 
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
@@ -100,19 +101,19 @@ angular.module('starter.controllers', [])
    console.log("afterEnter   " );
 
    var apigClient = apigClientFactory.newClient({
-    accessKey: ' ',
-    secretKey: ' ',
+    accessKey: '',
+    secretKey: '',
     //sessionToken: 'SESSION_TOKEN', //OPTIONAL: If you are using temporary credentials you must include the session token
     region: 'us-east-2' // OPTIONAL: The region where the API is deployed, by default this parameter is set to us-east-1
 });
  
     var params = {
       //This is where any header, path, or querystring request params go. The key is the parameter named as defined in the API
-      TableName: 'awssynopsisiosdemo-mobilehub-1926081490-Notes'
+      //TableName: 'awssynopsisiosdemo-mobilehub-1926081490-Notes'
   };
   var body = {
       //This is where you define the body of the request
-      //TableName:'awssynopsisiosdemo-mobilehub-1926081490-Notes'
+      TableName:'awssynopsisiosdemo-mobilehub-1926081490-Notes'
  
   };
   var additionalParams = {
@@ -120,6 +121,7 @@ angular.module('starter.controllers', [])
       headers: {
          // param0: '',
          // param1: ''
+        // Authorization:'AWS4-HMAC-SHA256 Credential=AKIAJSFR5WJXDMOZ4BVQ/20180703/us-east-2/execute-api/aws4_request, SignedHeaders=content-length;content-type;host;x-amz-date, Signature=a1187d7f78ae6268a03ff597626286ab6de085122b23fb00c31e965b9bbd175a'
       },
       queryParams: {
           //param0: '',
@@ -127,14 +129,72 @@ angular.module('starter.controllers', [])
       }
   };
   
-  apigClient.rootGet (params, body, additionalParams)
+  apigClient.consultarestexternoPost (params, body, additionalParams)
       .then(function(result){
           //This is where you would put a success callback
-          console.log("rootGet result from API Gateway ", result );
+          console.log("consultarestexternoPost result from API Gateway ", result );
 
       }).catch( function(result){
           //This is where you would put an error callback
-      });
+          console.log(" catch - consultarestexternoPost  ", result );
+      })
+
+
+
+  apigClient.consultasaldosAhorrosPost (params, body, additionalParams)
+      .then(function(result){
+          //This is where you would put a success callback
+          console.log("consultasaldosAhorrosPost result from API Gateway ", result );
+
+      }).catch( function(result){
+          //This is where you would put an error callback
+          console.log(" catch - consultasaldosAhorrosPost  ", result );
+      })
+
+  
+  apigClient.consultasaldosAhorrosDetallePost (params, body, additionalParams)
+      .then(function(result){
+          //This is where you would put a success callback
+          console.log("consultasaldosAhorrosDetallePost result from API Gateway ", result );
+
+      }).catch( function(result){
+          //This is where you would put an error callback
+          console.log(" catch - consultasaldosAhorrosDetallePost  ", result );
+      })
+
+      var bodyTransferencia = {
+        //This is where you define the body of the request
+         
+        TableName:'awssynopsisiosdemo-mobilehub-1926081490-Notes',
+        Item:{
+          'content': '#099921212',
+            'saldoCont': '1232321.99',
+            'noteId': '10380819-5809-43CF-9800-A47EA839E68D',
+            'userId': 'us-east-2:258fd7e5-5519-49da-9b8f-cd7148a59cd5',
+            'creationDate': 1528839565.919825,
+            'updatedDate': 1528839671.453481,
+            'title': '200999'
+        }
+      };
+      apigClient.transferenciasInterbancariaDiferidaOtrascuentasRealizaoperacionPost (params, bodyTransferencia, additionalParams)
+      .then(function(result){
+          //This is where you would put a success callback
+          console.log("transferenciasInterbancariaDiferidaOtrascuentasRealizaoperacionPost result from API Gateway ", result );
+
+      }).catch( function(result){
+          //This is where you would put an error callback
+          console.log(" catch - transferenciasInterbancariaDiferidaOtrascuentasRealizaoperacionPost  ", result );
+      })
+
+      apigClient.transferenciasInterbancariaInmediataOptions (params, body, additionalParams)
+      .then(function(result){
+          //This is where you would put a success callback
+          console.log("transferenciasInterbancariaInmediataOptions result from API Gateway ", result );
+
+      }).catch( function(result){
+          //This is where you would put an error callback
+          console.log(" catch - transferenciasInterbancariaInmediataOptions  ", result );
+      })
 
   })
 
